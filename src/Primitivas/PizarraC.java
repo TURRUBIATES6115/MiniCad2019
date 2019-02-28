@@ -1,7 +1,7 @@
 package Primitivas;
 
-
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -24,9 +24,6 @@ public class PizarraC extends javax.swing.JFrame {
     boolean bDibujar, bDibujar2;
 
     Raster raster;
-
-    int ancho = 640;
-    int alto = 480;
     Opciones op = new Opciones();
     boolean firstTime = true;
 
@@ -35,7 +32,9 @@ public class PizarraC extends javax.swing.JFrame {
         p1 = new Point();
         p2 = new Point();
         bDibujar = false;
-        raster = new Raster(640, 470);
+        this.setMaximumSize(new Dimension(640, 480));
+        this.setMinimumSize(new Dimension(640, 480));
+        raster = new Raster(640, 480);
         this.setLocationRelativeTo(null);
         op.setLocation(this.getX() - op.getWidth() - 15, this.getY());
         op.setVisible(true);
@@ -163,7 +162,7 @@ public class PizarraC extends javax.swing.JFrame {
             PlotPoint(g, xc, yc, x, y);
         }
     }
-    */
+     */
     public void Elipse2(Point p1, Point p2) {
         Graphics g = this.getGraphics();
         g.setColor(Color.red);
@@ -188,7 +187,7 @@ public class PizarraC extends javax.swing.JFrame {
         g.drawImage(output, 0, 0, this);
     }
 
-    public void clear() {        
+    public void clear() {
         int s = raster.size();
         for (int i = 0; i < s; i++) {
             raster.pixel[i] ^= 0x00ffffff;
@@ -274,7 +273,7 @@ public class PizarraC extends javax.swing.JFrame {
                 Elipse2(p1, p2);
                 bDibujar = false;
             }
-        } 
+        }
     }//GEN-LAST:event_formMouseClicked
 
     private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
