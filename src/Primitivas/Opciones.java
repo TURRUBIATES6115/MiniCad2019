@@ -5,7 +5,6 @@ package Primitivas;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Ivan
@@ -33,6 +32,7 @@ public class Opciones extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Opciones");
@@ -50,20 +50,25 @@ public class Opciones extends javax.swing.JFrame {
         buttonGroup1.add(jRadioButton3);
         jRadioButton3.setText("Elipse");
 
+        buttonGroup1.add(jRadioButton4);
+        jRadioButton4.setText("Triangulo");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jRadioButton2)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jLabel1)))
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRadioButton2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jLabel1)))
+                        .addComponent(jRadioButton3, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jRadioButton1, javax.swing.GroupLayout.Alignment.LEADING)))
                 .addGap(72, 72, 72))
         );
         layout.setVerticalGroup(
@@ -77,7 +82,9 @@ public class Opciones extends javax.swing.JFrame {
                 .addComponent(jRadioButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jRadioButton3)
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jRadioButton4)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -96,6 +103,10 @@ public class Opciones extends javax.swing.JFrame {
 
     public boolean getb3() {
         return this.jRadioButton3.isSelected();
+    }
+
+    public boolean getb4() {
+        return this.jRadioButton4.isSelected();
     }
 
     public static void main(String args[]) {
@@ -136,5 +147,6 @@ public class Opciones extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     // End of variables declaration//GEN-END:variables
 }

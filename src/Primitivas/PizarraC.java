@@ -3,6 +3,7 @@ package Primitivas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 
@@ -20,7 +21,7 @@ public class PizarraC extends javax.swing.JFrame {
     /**
      * Creates new form PizarraC
      */
-    Point p1, p2;
+    Point p1, p2, p3;
     boolean bDibujar, bDibujar2;
 
     Raster raster;
@@ -31,7 +32,8 @@ public class PizarraC extends javax.swing.JFrame {
         initComponents();
         p1 = new Point();
         p2 = new Point();
-        bDibujar = false;
+        p3 = new Point();
+        bDibujar = bDibujar2 = false;
         this.setMaximumSize(new Dimension(640, 480));
         this.setMinimumSize(new Dimension(640, 480));
         raster = new Raster(640, 480);
@@ -103,7 +105,6 @@ public class PizarraC extends javax.swing.JFrame {
         int x, y, p, xc = p1.x, yc = p1.y;
         int r = (int) Math.sqrt(((p2.x - p1.x) * (p2.x - p1.x)) + ((p2.y - p1.y) * (p2.y - p1.y)));
         Graphics g = this.getGraphics();
-        g.setColor(Color.red);
         x = 0;
         y = r;
         p = 1 - r;
@@ -119,6 +120,7 @@ public class PizarraC extends javax.swing.JFrame {
             PlotPoint(g, xc, yc, x, y);
         }
     }
+
     /*
     public void Elipse(Point p1, Point p2) {
         Graphics g = this.getGraphics();
@@ -168,6 +170,17 @@ public class PizarraC extends javax.swing.JFrame {
         g.setColor(Color.red);
         int an = (int) Math.sqrt(((p2.x - p1.x) * (p2.x - p1.x)) + ((p2.y - p1.y) * (p2.y - p1.y)));
         g.drawOval(p1.x, p1.y, an * 2, an);
+    }
+
+    public void triangulo(Point p1, Point p2, Point p3) {
+        lineFast(p1.x, p1.y, p2.x, p2.y, Color.red);
+        lineFast(p1.x, p1.y, p3.x, p3.y, Color.red);
+        lineFast(p2.x, p2.y, p3.x, p3.y, Color.red);
+        Graphics g = this.getGraphics();
+        g.setColor(Color.red);
+        int x[] ={p1.x,p2.x,p3.x};
+        int y[] ={p1.y,p2.y,p3.y};
+        g.fillPolygon(x, y, 3);
     }
 
     @Override
@@ -272,6 +285,21 @@ public class PizarraC extends javax.swing.JFrame {
                 p2.y = evt.getY();
                 Elipse2(p1, p2);
                 bDibujar = false;
+            }
+        } else if (op.getb4()) {
+            if (!bDibujar && !bDibujar2) {
+                p1.x = evt.getX();
+                p1.y = evt.getY();
+                bDibujar = true;
+            } else if (bDibujar && !bDibujar2) {
+                p2.x = evt.getX();
+                p2.y = evt.getY();
+                bDibujar2 = true;
+            } else if (bDibujar && bDibujar2) {
+                p3.x = evt.getX();
+                p3.y = evt.getY();
+                triangulo(p1, p2, p3);
+                bDibujar = bDibujar2 = false;
             }
         }
     }//GEN-LAST:event_formMouseClicked
