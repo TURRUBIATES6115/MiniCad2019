@@ -3,7 +3,6 @@ package Primitivas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 
@@ -21,12 +20,12 @@ public class PizarraC extends javax.swing.JFrame {
     /**
      * Creates new form PizarraC
      */
-    Point p1, p2, p3;
+    Point p1, p2, p3,p4;
     boolean bDibujar, bDibujar2;
 
     Raster raster;
-    Opciones op = new Opciones();
-    boolean firstTime = true;
+    int op;
+    boolean firstTime = true;    
 
     public PizarraC() {
         initComponents();
@@ -38,8 +37,8 @@ public class PizarraC extends javax.swing.JFrame {
         this.setMinimumSize(new Dimension(640, 480));
         raster = new Raster(640, 480);
         this.setLocationRelativeTo(null);
-        op.setLocation(this.getX() - op.getWidth() - 15, this.getY());
-        op.setVisible(true);
+        //op.setLocation(this.getX() - op.getWidth() - 15, this.getY());
+        this.getContentPane().setBackground(Color.white);      
     }
 
     public void lineFast(int x0, int y0, int x1, int y1, Color color) {
@@ -121,50 +120,6 @@ public class PizarraC extends javax.swing.JFrame {
         }
     }
 
-    /*
-    public void Elipse(Point p1, Point p2) {
-        Graphics g = this.getGraphics();
-        int x, y, p, px, py, xc = p1.x, yc = p1.y, rx = p2.x, ry = p2.y;
-        int rx2, ry2, tworx2, twory2;
-        ry2 = ry * ry;
-        rx2 = rx * rx;
-        twory2 = 2 * ry2;
-        tworx2 = 2 * rx2;        
-        x = 0;
-        y = ry;
-        PlotPoint(g, x, y, xc, yc);
-        p = (int) Math.round(ry2 - rx2 * ry + 0.25 * rx2);
-        px = 0;
-        py = tworx2 * y;
-        while (px < py) {            
-            x = x + 1;
-            px = px + twory2;
-            if (p < 0) {
-                p = p + ry2 + px;
-            } else {
-                y = y - 1;
-                py = py - tworx2;
-                p = p + ry2 + px - py;
-            }
-            PlotPoint(g, xc, yc, x, y);
-        }
-        p = (int) Math.round(ry2 * (x + 0.5) * (x + 0.5) + rx2 * (y - 1) * (y - 1) - rx2 * ry2);
-        px = 0;
-        py = tworx2 * y;
-        while (y > 0) {
-            y = y - 1;
-            py = py - tworx2;
-            if (p > 0) {
-                p = p + rx2 - py;
-            } else {
-                x = x + 1;
-                px = px + twory2;
-                p = p + rx2 + py + px;
-            }
-            PlotPoint(g, xc, yc, x, y);
-        }
-    }
-     */
     public void Elipse2(Point p1, Point p2) {
         Graphics g = this.getGraphics();
         g.setColor(Color.red);
@@ -178,8 +133,8 @@ public class PizarraC extends javax.swing.JFrame {
         lineFast(p2.x, p2.y, p3.x, p3.y, Color.red);
         Graphics g = this.getGraphics();
         g.setColor(Color.red);
-        int x[] ={p1.x,p2.x,p3.x};
-        int y[] ={p1.y,p2.y,p3.y};
+        int x[] = {p1.x, p2.x, p3.x};
+        int y[] = {p1.y, p2.y, p3.y};
         g.fillPolygon(x, y, 3);
     }
 
@@ -223,17 +178,12 @@ public class PizarraC extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pizarra");
+        setTitle("MiniCad");
         setResizable(false);
         setSize(new java.awt.Dimension(640, 480));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
-            }
-        });
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentMoved(java.awt.event.ComponentEvent evt) {
-                formComponentMoved(evt);
             }
         });
 
@@ -253,61 +203,59 @@ public class PizarraC extends javax.swing.JFrame {
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
         // TODO add your handling code here:
-        if (op.getb1()) {
-            if (!bDibujar) {
-                p1.x = evt.getX();
-                p1.y = evt.getY();
-                bDibujar = true;
-            } else {
-                p2.x = evt.getX();
-                p2.y = evt.getY();
-                dibujarLinea(p1, p2, Color.red);
-                bDibujar = false;
-            }
-        } else if (op.getb2()) {
-            if (!bDibujar) {
-                p1.x = evt.getX();
-                p1.y = evt.getY();
-                bDibujar = true;
-            } else {
-                p2.x = evt.getX();
-                p2.y = evt.getY();
-                CircleMidPoint(p1, p2);
-                bDibujar = false;
-            }
-        } else if (op.getb3()) {
-            if (!bDibujar) {
-                p1.x = evt.getX();
-                p1.y = evt.getY();
-                bDibujar = true;
-            } else {
-                p2.x = evt.getX();
-                p2.y = evt.getY();
-                Elipse2(p1, p2);
-                bDibujar = false;
-            }
-        } else if (op.getb4()) {
-            if (!bDibujar && !bDibujar2) {
-                p1.x = evt.getX();
-                p1.y = evt.getY();
-                bDibujar = true;
-            } else if (bDibujar && !bDibujar2) {
-                p2.x = evt.getX();
-                p2.y = evt.getY();
-                bDibujar2 = true;
-            } else if (bDibujar && bDibujar2) {
-                p3.x = evt.getX();
-                p3.y = evt.getY();
-                triangulo(p1, p2, p3);
-                bDibujar = bDibujar2 = false;
-            }
+        switch (op) {
+            case 1:
+                if (!bDibujar) {
+                    p1.x = evt.getX();
+                    p1.y = evt.getY();
+                    bDibujar = true;
+                } else {
+                    p2.x = evt.getX();
+                    p2.y = evt.getY();
+                    dibujarLinea(p1, p2, Color.red);
+                    bDibujar = false;
+                }   break;
+            case 2:
+                if (!bDibujar) {
+                    p1.x = evt.getX();
+                    p1.y = evt.getY();
+                    bDibujar = true;
+                } else {
+                    p2.x = evt.getX();
+                    p2.y = evt.getY();
+                    CircleMidPoint(p1, p2);
+                    bDibujar = false;
+                }   break;
+            case 3:
+                if (!bDibujar) {
+                    p1.x = evt.getX();
+                    p1.y = evt.getY();
+                    bDibujar = true;
+                } else {
+                    p2.x = evt.getX();
+                    p2.y = evt.getY();
+                    Elipse2(p1, p2);
+                    bDibujar = false;
+                }   break;
+            case 4:
+                if (!bDibujar && !bDibujar2) {
+                    p1.x = evt.getX();
+                    p1.y = evt.getY();
+                    bDibujar = true;
+                } else if (bDibujar && !bDibujar2) {
+                    p2.x = evt.getX();
+                    p2.y = evt.getY();
+                    bDibujar2 = true;
+                } else if (bDibujar && bDibujar2) {
+                    p3.x = evt.getX();
+                    p3.y = evt.getY();
+                    triangulo(p1, p2, p3);
+                    bDibujar = bDibujar2 = false;
+                }   break;
+            default:
+                break;
         }
     }//GEN-LAST:event_formMouseClicked
-
-    private void formComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentMoved
-        // TODO add your handling code here:
-        this.op.setLocation(this.getX() - op.getWidth() - 15, this.getY());
-    }//GEN-LAST:event_formComponentMoved
 
     /**
      * @param args the command line arguments
